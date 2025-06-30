@@ -1,4 +1,7 @@
 package ru.qa.api.client.enums;
 
-public enum HttpMethod {
+/**
+ * Методы для работы с HTTP-протоколом
+ */
+public enum HttpMethod implements Method{
 }
