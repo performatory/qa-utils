@@ -1,9 +1,9 @@
 package ru.qa.api.client.interfaces;
 
-public interface RequestAdapter<T> {
+public interface RequestAdapter {
 
     /**
      * Подготовить запрос для выбранного клиента
      */
-    T performRequest();
+    <T> T performRequest();
 }

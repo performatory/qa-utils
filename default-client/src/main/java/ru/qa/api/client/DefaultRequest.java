@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultRequest implements Request, RequestAdapter<HttpRequest> {
+public class DefaultRequest implements Request, RequestAdapter{
 
     private HttpRequest request;
     private HttpRequest.Builder builder;
@@ -84,11 +84,16 @@ public class DefaultRequest implements Request, RequestAdapter<HttpRequest> {
 
     @Override
     public Map<String, String> getQueries() {
-        return Map.of();
+        return queries;
     }
 
     @Override
     public HttpRequest performRequest() {
-        return null;
+        if (method.isGet()) builder.GET();
+
+        if (headers != null && !headers.isEmpty())
+            headers.forEach(header -> builder.setHeader(header.getKey(), header.getValue()));
+
+        return builder.uri(uri).build();
     }
 }
