@@ -21,7 +21,7 @@ public class DefaultRequest implements Request, RequestAdapter{
     private String stringBody;
     private Object body;
     private Method method;
-    private List<Header> headers;
+    private List<Header> headers = new ArrayList<>();
 
 
     public DefaultRequest() {
@@ -65,14 +65,12 @@ public class DefaultRequest implements Request, RequestAdapter{
 
     @Override
     public Request addHeaders(List<Header> headers) {
-        this.headers = headers;
+        this.headers.addAll(headers);
         return this;
     }
 
     @Override
     public Request addHeader(String key, String value) {
-        if (headers == null)
-            headers = new ArrayList<>();
         headers.add(new DefaultHeader(key, value));
         return this;
     }
