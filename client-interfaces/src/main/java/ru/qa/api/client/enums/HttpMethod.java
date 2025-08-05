@@ -7,6 +7,6 @@ public enum HttpMethod implements Method{
     GET;
 
     public boolean isGet() {
-        return this.equals(GET);
+        return this == GET;
     }
 }

@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class DefaultRequest implements Request, RequestAdapter{
 
-    private HttpRequest request;
     private HttpRequest.Builder builder;
     private URI uri;
     private Map<String, String> queries;
@@ -86,11 +85,11 @@ public class DefaultRequest implements Request, RequestAdapter{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public HttpRequest performRequest() {
         if (method.isGet()) builder.GET();
 
-        if (headers != null && !headers.isEmpty())
-            headers.forEach(header -> builder.setHeader(header.getKey(), header.getValue()));
+        headers.forEach(header -> builder.setHeader(header.getKey(), header.getValue()));
 
         return builder.uri(uri).build();
     }
