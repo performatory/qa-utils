@@ -12,5 +12,6 @@
 
     <modules>
         <module>client-interfaces</module>
+        <module>default-client</module>
     </modules>
 </project>

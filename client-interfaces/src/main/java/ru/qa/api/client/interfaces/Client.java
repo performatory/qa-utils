@@ -10,5 +10,5 @@ public interface Client {
      *                Можно сформировать либо через сеттеры
      * @return - полученный ответ от сервиса на отправленный запрос
      */
-    ResponseActions execute(Request request);
+    ResponseActions execute(RequestAdapter request);
 }

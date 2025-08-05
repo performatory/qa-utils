@@ -10,19 +10,19 @@ import java.util.Map;
  */
 public interface Request {
     /**
-     * Установить url для отправки запроса
-     * @return - объект запроса с установленной URL
+     * Установить uri для отправки запроса
+     * @return - объект запроса с установленной URI
      */
-    Request setUrl(String url);
+    Request setUri(String uri);
 
     /**
-     * Добавить параметры запроса в URL
+     * Добавить параметры запроса в URI
      * В результате выполнения метода в моменты выполнения запроса клиентом
-     * к установленной URL будет добавлен знак вопроса `?` и после него
+     * к установленной URI будет добавлен знак вопроса `?` и после него
      * параметры, разделённые между собой знаком `&`, каждый элемент объекта Map
      * будет записан следующим образом: ключ=значение
      * Пример:
-     * https://www.somehost.com/wiki/URL?key1=value1&key2=value2&key3=value3
+     * https://www.somehost.com/wiki/name?key1=value1&key2=value2&key3=value3
      * @return - объект запроса с установленными параметрами запроса
      */
     Request setQueries(Map<String, String> queries);
@@ -62,9 +62,9 @@ public interface Request {
     Request addHeader(String key, String value);
 
     /**
-     * Получить значение URL из объекта запроса в строковом формате
+     * Получить значение URI из объекта запроса в строковом формате
      */
-    String getUrl();
+    String getUri();
 
     /**
      * @return - Параметры запроса
