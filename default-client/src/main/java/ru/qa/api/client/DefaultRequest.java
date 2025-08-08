@@ -59,6 +59,13 @@ public class DefaultRequest implements Request, RequestAdapter{
 
 
     @Override
+    public Request setBodyAsJSON(Object objectBody) {
+        this.body = new Gson().toJson(objectBody);
+        return this;
+    }
+
+
+    @Override
     public Request setMethod(Method method) {
         this.method = method;
         return this;
