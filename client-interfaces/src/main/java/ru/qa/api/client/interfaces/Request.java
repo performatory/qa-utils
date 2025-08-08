@@ -28,16 +28,18 @@ public interface Request {
     Request setQueries(Map<String, String> queries);
 
     /**
-     * Вставить тело запроса в текстовом виде
-     * @return - объект запроса с установленным телом запроса
-     */
-    Request setStringBody(String body);
-
-    /**
      * Вставить тело запроса в виде объекта
      * @return - объект запроса с установленным телом запроса
      */
     Request setBody(Object body);
+
+    /**
+     * Вставить тело запроса в виде json (будет произведено преобразование объекта в JSON,
+     * результат будет добавлен в тело запроса)
+     * @param objectBody - объект тела запроса, который необходимо преобразовать в JSON
+     * @return - объект запроса с установленным телом запроса
+     */
+    Request setBodyAsJSON(Object objectBody);
 
     /**
      * Установить метод запроса

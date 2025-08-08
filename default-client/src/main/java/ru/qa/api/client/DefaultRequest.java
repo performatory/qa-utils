@@ -1,5 +1,6 @@
 package ru.qa.api.client;
 
+import com.google.gson.Gson;
 import ru.qa.api.client.enums.Method;
 import ru.qa.api.client.interfaces.Header;
 import ru.qa.api.client.interfaces.Request;
@@ -8,6 +9,7 @@ import ru.qa.api.client.interfaces.RequestAdapter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,6 @@ public class DefaultRequest implements Request, RequestAdapter{
     private HttpRequest.Builder builder;
     private URI uri;
     private Map<String, String> queries;
-    private String stringBody;
     private Object body;
     private Method method;
     private List<Header> headers = new ArrayList<>();
@@ -45,16 +46,17 @@ public class DefaultRequest implements Request, RequestAdapter{
     }
 
     @Override
-    public Request setStringBody(String stringBody) {
-        this.stringBody = stringBody;
-        return this;
-    }
-
-    @Override
     public Request setBody(Object body) {
         this.body = body;
         return this;
     }
+    //TODO setBody(Path path), setBody(byte[] buf), setBody(String str), setBodyAsJSON(Object obj) - добавить.
+    @Override
+    public Request setBodyAsJSON(Object objectBody) {
+        this.body = new Gson().toJson(objectBody);
+        return this;
+    }
+
 
     @Override
     public Request setMethod(Method method) {
@@ -87,10 +89,16 @@ public class DefaultRequest implements Request, RequestAdapter{
     @Override
     @SuppressWarnings("unchecked")
     public HttpRequest performRequest() {
-        if (method.isGet()) builder.GET();
+        builder.method(method.toString(), getBody());
 
         headers.forEach(header -> builder.setHeader(header.getKey(), header.getValue()));
 
         return builder.uri(uri).build();
+    }
+
+    private HttpRequest.BodyPublisher getBody() {
+        if (body instanceof String) return BodyPublishers.ofString((String) body);
+
+        return BodyPublishers.noBody();
     }
 }

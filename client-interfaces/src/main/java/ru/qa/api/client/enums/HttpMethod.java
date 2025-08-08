@@ -4,9 +4,16 @@ package ru.qa.api.client.enums;
  * Методы для работы с HTTP-протоколом
  */
 public enum HttpMethod implements Method{
-    GET;
+    GET("GET"),
+    POST("POST"),
+    PUT("PUT"),
+    DELETE("DELETE");
 
-    public boolean isGet() {
-        return this == GET;
+    final String name;
+
+    HttpMethod(String name) {
+        this.name = name;
     }
+
+    public String toString() {return name;}
 }
