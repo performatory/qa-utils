@@ -11,17 +11,13 @@ import java.util.Map;
 
 public class ClientWithStringBodyTest {
 
-    //https://aviationweather.gov/data/api/#schema
+    //https://petstore.swagger.io/v2/swagger.json
     @Test
     void getRequestTest() {
         DefaultRequest request = new DefaultRequest();
 
         request
-                .setUri("https://aviationweather.gov/api/data/metar")
-                .setQueries(Map.of(
-                        "ids", "KMCI",
-                        "format", "json"
-                ))
+                .setUri("https://petstore.swagger.io/v2/store/inventory")
                 .setMethod(HttpMethod.GET);
 
         new DefaultClient()

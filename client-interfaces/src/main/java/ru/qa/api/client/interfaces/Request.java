@@ -2,8 +2,11 @@ package ru.qa.api.client.interfaces;
 
 import ru.qa.api.client.enums.Method;
 
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Контракт для подготовки запроса к тестируемому сервису
@@ -28,10 +31,27 @@ public interface Request {
     Request setQueries(Map<String, String> queries);
 
     /**
+     * Вставить тело запроса в виде потока данных
+     * @return - объект запроса с установленным телом запроса
+     */
+    Request setBodyAsStream(Supplier<? extends InputStream> streamSupplier);
+    /**
      * Вставить тело запроса в виде объекта
      * @return - объект запроса с установленным телом запроса
      */
-    Request setBody(Object body);
+    Request setBody(Path path);
+
+    /**
+     * Вставить тело запроса в виде массива байт
+     * @return - объект запроса с установленным телом запроса
+     */
+    Request setBody(byte[] body);
+
+    /**
+     * Вставить тело запроса в виде строки
+     * @return - объект запроса с установленным телом запроса
+     */
+    Request setBody(String body);
 
     /**
      * Вставить тело запроса в виде json (будет произведено преобразование объекта в JSON,
