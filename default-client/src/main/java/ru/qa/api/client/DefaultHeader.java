@@ -3,8 +3,8 @@ package ru.qa.api.client;
 import ru.qa.api.client.interfaces.Header;
 
 public class DefaultHeader implements Header {
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
     public DefaultHeader(String key, String value) {
         this.key = key;

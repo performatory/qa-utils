@@ -27,7 +27,7 @@ public class DefaultResponse implements ResponseActions {
     @Override
     public ResponseActions shouldBeStatusCode(int expectedStatusCode) {
         if (response.statusCode() != expectedStatusCode)
-            throw new APIAssertionError("Не совпадает код ответа");
+            throw new APIAssertionError("Не совпадает код ответа", expectedStatusCode, response.statusCode());
         return this;
     }
 
